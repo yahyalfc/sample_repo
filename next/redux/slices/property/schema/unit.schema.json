@@ -1,0 +1,98 @@
+{
+    "unit_id": "",
+    "name": "",
+    "check_in_types": [],
+    "checkout_instruction": null,
+    "wifi": {
+      "wifi_name": null,
+      "wifi_password": null,
+      "wifi_extra_instruction": null
+    },
+    "parking": {
+      "parking_extra_instruction": null,
+      "number_of_parking_spots": null,
+      "parking_spot_number": null,
+      "parking_type": {
+        "id": 0,
+        "name": "",
+        "description": null
+      }
+    },
+    "checkin_instruction": null,
+    "maintenance_contact": null,
+    "images": [],
+    "unit_size": null,
+    "direction": null,
+    "entrance_code": null,
+    "access_code": null,
+    "min_walk": null,
+    "min_drive": null,
+    "guidebook_url": null,
+    "created_at": null,
+    "updated_at": null,
+    "status": null,
+    "unit_type": {
+      "id": 0,
+      "name": "",
+      "property": null,
+      "unit_type_category": {
+        "id": 0,
+        "name": "",
+        "type": "",
+        "show_name": null
+      }
+    },
+    "deal_type": null,
+    "key_safe_location": null,
+    "key_safe_label": null,
+    "other_access_instructions": null,
+    "check_in_type": {
+      "id": 0,
+      "name": "",
+      "type": "",
+      "description": null
+    },
+    "floor": null,
+    "checkin_highlighted_points": null,
+    "key_safe_type": {
+      "id": 0,
+      "name": "",
+      "description": ""
+    },
+    "has_storage": null,
+    "key_sets": [],
+    "building": null,
+    "check_in_guide": null,
+    "house_manual": null,
+    "key_place_profile": {
+      "id": 0,
+      "name": "",
+      "key_place_type": "",
+      "opening_times": null,
+      "address": {
+        "id": 0,
+        "latitude": null,
+        "longitude": null,
+        "first_line": null,
+        "second_line": null,
+        "city": null,
+        "postal_code": null,
+        "country": {
+          "iso2_code": "",
+          "iso3_code": ""
+        },
+        "region": {
+          "combined_code": "",
+          "country": null,
+          "code": "",
+          "name": ""
+        },
+        "full_address": "",
+        "region_code": null,
+        "complete_address": ""
+      }
+    },
+    "smart_locks": [],
+    "has_smart_lock_integration": null,
+    "has_key_nest_integration": null
+  }

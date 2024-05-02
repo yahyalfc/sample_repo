@@ -1,0 +1,11 @@
+.hometext:hover {
+  border-color: ivory;
+  background-color: white;
+}
+.home:hover {
+  padding-top: 5px;
+}
+notify {
+  background-color: "green";
+  width: "1%";
+}

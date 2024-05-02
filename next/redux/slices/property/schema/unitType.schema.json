@@ -1,0 +1,71 @@
+{
+    "unit_type_id": "",
+    "name": "",
+    "marketing_name": "",
+    "description": "",
+    "average_house_keeping_time": null,
+    "rate_plans": [],
+    "property": null,
+    "units": [],
+    "accomodation_detail": {
+      "bedrooms": null,
+      "maximum_capacity": null,
+      "hallway": null,
+      "kitchen": null,
+      "living_area": null,
+      "full_bathrooms": null,
+      "rooms": [],
+      "half_bathrooms": null,
+      "full_kitchens": null,
+      "kitchenettes": null,
+      "dining_areas": null,
+      "offices": null,
+      "yards": null,
+      "patios": null,
+      "balconies": null,
+      "laundry_areas": null,
+      "basements": null,
+      "full_shower_rooms": null,
+      "full_bath_plus_shower_rooms": null,
+      "toilets": null,
+      "shower": null,
+      "number_of_floors_per_unit": null
+    },
+    "extra_amenities": [],
+    "unit_type_size": null,
+    "unit_type_category": {
+      "id": 0,
+      "name": 0,
+      "type": 0,
+      "show_name": ""
+    },
+    "parking_type": null,
+    "created_at": "",
+    "updated_at": "",
+    "deposit": {
+      "currency": "",
+      "value": null
+    },
+    "deposit_weekly": {
+      "currency": "",
+      "value": null
+    },
+    "deposit_monthly": {
+      "currency": "",
+      "value": null
+    },
+    "deposit_config": {
+      "id": 0,
+      "authorization_type": "",
+      "authorize_days_before_arrival": null,
+      "release_days_after_departure": null
+    },
+    "unit_category": "",
+    "extra_information": "",
+    "cover_image": null,
+    "staah_id": "",
+    "unit_name_format": "",
+    "abb_listing_id": "",
+    "images": null,
+    "unit_images": null
+  }

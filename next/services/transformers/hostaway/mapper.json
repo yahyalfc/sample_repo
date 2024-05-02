@@ -1,0 +1,36 @@
+{
+    "property_id": "id",
+    "property_name": "name",
+    "property_type": {"extractPropertyType": ["propertyTypeId", "fetchedPropertyType"]},
+    "property_description": {"extractDescription": ["description", "houseRules", "doorSecurityCode", "keyPickup"]},
+    "integration_type": "integration_type",   
+    "property_image_url": {"extractImages": ["listingImages"]},    
+    "wifi_details.wifi_name": "wifiUsername",
+    "wifi_details.wifi_password": "wifiPassword",
+    "reservation": {"extractCheckinCheckoutTimes": ["checkInTimeStart", "checkInTimeEnd", "checkOutTime" ]},
+
+    "location.lat": "lat",
+    "location.lng": "lng",
+    "location.country": "country",
+    "location.city": "city",
+    "location.complete_address": "address",
+    "location.postal_code": "zipcode",
+    "location.time_zone": "timeZoneName",
+   
+    "financials.cleaning_fee": "cleaningFee",
+    "financials.extra_person_fee": "priceForExtraPerson",
+    "financials.refundable_damage_deposit": "refundableDamageDeposit",
+    "financials.currency": "currencyCode",
+
+    "accomodation.number_of_rooms": "bedroomsNumber",
+    "accomodation.number_of_beds": "bedsNumber",
+    "accomodation.number_of_bathrooms": "bathroomsNumber",
+    "accomodation": {"extractRoomsAndGuestCapacity": ["roomType", "bedroomsNumber", "fetchedBedType", "listingBedTypes", "maxChildrenAllowed", "maxInfantsAllowed", "personCapacity" ]},
+
+    "amenities": {"extractAmenities": ["listingAmenities"]},
+
+    "guest_policies": {"extractPolicies": ["cancellationPolicy", "listingAmenities"]},
+    "terms.min_nights": "minNights",
+    "terms.max_nights": "maxNights",
+    "contacts": {"extractContacts": ["contactName", "contactSurName", "contactPhone1", "contactEmail"]}
+}

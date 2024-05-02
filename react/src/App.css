@@ -1,0 +1,18 @@
+.html {
+  font-family: "Italic", sans-serif;
+}
+body {
+  margin: 0;
+  font-family: "Nunito Sans", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+.heading {
+  font-weight: 700;
+}
+.subheading {
+  font-weight: 300;
+}
+.MuiTooltip-tooltip {
+  background-color: yellow;
+}

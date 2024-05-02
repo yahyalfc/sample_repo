@@ -1,0 +1,24 @@
+{
+    "property_id": "id",
+    "property_name": "name",
+    "property_type": "property_category.name",
+    "property_description": "description_brief",
+    "integration_type": "integration_type",  
+    "guide_book_url":"guidebook_url",
+    "wifi_details.wifi_name": "wifi_name",
+    "wifi_details.wifi_password": "wifi_password",
+    "faqs":{"extractFaqs":["faqs"]},
+    "location.lat": "address.latitude",
+    "location.lng": "address.longitude",
+    "location.country": "address.country.name",
+    "location.city": "address.city",
+    "location.complete_address": "address.complete_address",
+    "location.postal_code": "address.zipcode",
+    "location.time_zone": "area.city.time_zone",
+    "parking.total_spots":"total_number_parking_spots",
+    "parking.parking_type":"parking_type",
+    "amenities": {"extractAmenities":["amenities"]},
+    "property_image_url":{
+        "extractPropertyImage":["images"]
+    }
+}

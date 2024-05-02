@@ -1,0 +1,7 @@
+{
+  "projects": {
+    "default": "klinker-7c315",
+    "dev": "klinker-backup",
+    "prod": "klinker-7c315"
+  }
+}

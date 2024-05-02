@@ -1,0 +1,359 @@
+openapi: 3.0.0
+info:
+  title: Product API
+  description: Manage product
+  version: 1.0.0
+servers:
+  - url: https://connect.weberlo.com
+x-amazon-apigateway-request-validators:
+  all:
+    validateRequestBody: true
+    validateRequestParameters: true
+  params-only:
+    validateRequestBody: false
+    validateRequestParameters: true
+components:
+  schemas:
+    ProductCondition:
+      type: object
+      properties:
+        description_like:
+          type: [string, 'null']
+        id_equal:
+          type: [string, 'null']
+        price_min:
+          type: [number, 'null']
+        price_max:
+          type: [number, 'null'] 
+    Product:
+      type: object
+      properties:
+        id:
+          type: string
+          pattern: "^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89abAB][0-9a-f]{3}-[0-9a-f]{12}$"
+          example: "123e4567-e89b-12d3-a456-426655440000"
+        workspace_id:
+          type: string
+          pattern: "^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89abAB][0-9a-f]{3}-[0-9a-f]{12}$"
+          example: "123e4567-e89b-12d3-a456-426655440000"
+        name:
+          type: string
+          example: "medium"
+        product_conditions:
+          type: array
+          items:
+            $ref: "#/components/schemas/ProductCondition"
+        created_at:
+          type: string
+          example: "2023-03-29T00:00:00.000Z"
+        updated_at:
+          type: string
+          example: "2023-03-29T00:00:00.000Z"
+
+  securitySchemes:
+    customAuthorizer:
+      type: apiKey
+      name: Authorization
+      in: header
+      x-amazon-apigateway-authtype: Custom authorizer
+      x-amazon-apigateway-authorizer:
+        type: request
+        identitySource: method.request.header.Authorization
+        authorizerUri: arn:${AWS::Partition}:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/arn:${AWS::Partition}:lambda:${AWS::Region}:${AWS::AccountId}:function:service-auth-auth/invocations
+        authorizerResultTtlInSeconds: 0
+paths:
+  /product:
+    parameters:
+      - in: query
+        name: workspace_id
+        description: Workspace ID required
+        required: true
+        schema:
+          type: string
+          pattern: "^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89abAB][0-9a-f]{3}-[0-9a-f]{12}$"
+          example: "123e4567-e89b-12d3-a456-426655440000"
+    options:
+      x-internal: true
+      summary: CORS support
+      description: |
+        Enable CORS by returning correct headers
+      tags:
+      - CORS
+      responses:
+        200:
+          description: Default response for CORS method
+          headers:
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+            Access-Control-Allow-Methods:
+              schema:
+                type: string
+            Access-Control-Allow-Headers:
+              schema:
+                type: string
+          content: {}
+      x-amazon-apigateway-integration:
+        type: mock
+        requestTemplates:
+          application/json: |
+            {
+              "statusCode" : 200
+            }
+        responses:
+          default:
+            statusCode: "200"
+            responseParameters:
+              method.response.header.Access-Control-Allow-Headers: '''Set-Cookie,Cookie,Session-ID,Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token,Access-Control-Allow-Headers,Access-Control-Allow-Credentials,Access-Control-Allow-Origin,Access-Control-Max-Age,Access-Control-Expose-Headers'''
+              method.response.header.Access-Control-Allow-Methods: '''*'''
+              method.response.header.Access-Control-Allow-Origin: '''*'''
+            responseTemplates:
+              application/json: |
+                {}
+    post:
+      tags:
+        - Product
+      summary: Add a product
+      security: [{ customAuthorizer: [] }]
+      x-amazon-apigateway-request-validator: all
+      x-amazon-apigateway-integration:
+        uri: arn:${AWS::Partition}:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/arn:${AWS::Partition}:lambda:${AWS::Region}:${AWS::AccountId}:function:service-product-add/invocations
+        passthroughBehavior: "when_no_match"
+        httpMethod: "POST"
+        contentHandling: "CONVERT_TO_TEXT"
+        type: "aws_proxy"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  example: "medium"
+                product_conditions:
+                  type: array
+                  items:
+                    $ref: "#/components/schemas/ProductCondition"
+              required:
+                - name
+                - product_conditions
+            examples:
+              application/json:
+                value:
+                  name: Product One
+                  product_conditions:
+                    - description_like: description_like
+                    - price_min: 100 
+                    - price_max: 200
+                    - id_equal: id_equal
+      responses:
+        "200":
+          description: Successfully added a product
+        "204":
+          description: Workspace not found
+        "400":
+          description: An error occcured
+        "500":
+          description: Internal server error
+
+  /product/{id}:
+    parameters:
+      - in: path
+        name: id
+        description: The id of product to delete
+        required: true
+        schema:
+          type: string
+          pattern: "^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89abAB][0-9a-f]{3}-[0-9a-f]{12}$"
+          example: "123e4567-e89b-12d3-a456-426655440000"
+      - in: query
+        name: workspace_id
+        description: Workspace ID is required in every request
+        required: true
+        schema:
+          type: string
+          pattern: "^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89abAB][0-9a-f]{3}-[0-9a-f]{12}$"
+          example: "123e4567-e89b-12d3-a456-426655440000"
+    options:
+      x-internal: true
+      summary: CORS support
+      description: |
+        Enable CORS by returning correct headers
+      tags:
+      - CORS
+      responses:
+        200:
+          description: Default response for CORS method
+          headers:
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+            Access-Control-Allow-Methods:
+              schema:
+                type: string
+            Access-Control-Allow-Headers:
+              schema:
+                type: string
+          content: {}
+      x-amazon-apigateway-integration:
+        type: mock
+        requestTemplates:
+          application/json: |
+            {
+              "statusCode" : 200
+            }
+        responses:
+          default:
+            statusCode: "200"
+            responseParameters:
+              method.response.header.Access-Control-Allow-Headers: '''Set-Cookie,Cookie,Session-ID,Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token,Access-Control-Allow-Headers,Access-Control-Allow-Credentials,Access-Control-Allow-Origin,Access-Control-Max-Age,Access-Control-Expose-Headers'''
+              method.response.header.Access-Control-Allow-Methods: '''*'''
+              method.response.header.Access-Control-Allow-Origin: '''*'''
+            responseTemplates:
+              application/json: |
+                {}
+    delete:
+      tags:
+        - Product
+      summary: Deletes a product
+      security: [{ customAuthorizer: [] }]
+      x-amazon-apigateway-request-validator: params-only
+      x-amazon-apigateway-integration:
+        uri: arn:${AWS::Partition}:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/arn:${AWS::Partition}:lambda:${AWS::Region}:${AWS::AccountId}:function:service-product-delete/invocations
+        passthroughBehavior: "when_no_match"
+        httpMethod: "POST"
+        contentHandling: "CONVERT_TO_TEXT"
+        type: "aws_proxy"
+      responses:
+        "200":
+          description: Successfully deleted product
+        "204":
+          description: Workspace not found
+        "404":
+          description: Product not found
+        "500":
+          description: Internal server error
+
+  /product/list:
+    parameters:
+      - in: query
+        name: workspace_id
+        description: The workspace_id of product to get or delete
+        required: true
+        schema:
+          type: string
+          pattern: "^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89abAB][0-9a-f]{3}-[0-9a-f]{12}$"
+          example: "123e4567-e89b-12d3-a456-426655440000"
+      - in: query
+        name: limit
+        description: Limit of objects to get
+        required: false
+        schema:
+          type: number
+          example: 2
+      - in: query
+        name: offset
+        description: skip number of objects to get in list
+        required: false
+        schema:
+          type: number
+          example: 5    
+    options:
+      x-internal: true
+      summary: CORS support
+      description: |
+        Enable CORS by returning correct headers
+      tags:
+      - CORS
+      responses:
+        200:
+          description: Default response for CORS method
+          headers:
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+            Access-Control-Allow-Methods:
+              schema:
+                type: string
+            Access-Control-Allow-Headers:
+              schema:
+                type: string
+          content: {}
+      x-amazon-apigateway-integration:
+        type: mock
+        requestTemplates:
+          application/json: |
+            {
+              "statusCode" : 200
+            }
+        responses:
+          default:
+            statusCode: "200"
+            responseParameters:
+              method.response.header.Access-Control-Allow-Headers: '''Set-Cookie,Cookie,Session-ID,Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token,Access-Control-Allow-Headers,Access-Control-Allow-Credentials,Access-Control-Allow-Origin,Access-Control-Max-Age,Access-Control-Expose-Headers'''
+              method.response.header.Access-Control-Allow-Methods: '''*'''
+              method.response.header.Access-Control-Allow-Origin: '''*'''
+            responseTemplates:
+              application/json: |
+                {}
+    get:
+      tags:
+        - Product
+      summary: List of products
+      security: [{ customAuthorizer: [] }]
+      x-amazon-apigateway-request-validator: params-only
+      x-amazon-apigateway-integration:
+        uri: arn:${AWS::Partition}:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/arn:${AWS::Partition}:lambda:${AWS::Region}:${AWS::AccountId}:function:service-product-list/invocations
+        passthroughBehavior: "when_no_match"
+        httpMethod: "POST"
+        contentHandling: "CONVERT_TO_TEXT"
+        type: "aws_proxy"
+      responses:
+        "200":
+          description: Successfully retrieved product list
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  items:
+                    type: array
+                    items:
+                      $ref: "#/components/schemas/Product"
+              examples:
+                application/json:
+                  value:
+                    limit: 10
+                    offset: 0
+                    total_count: 12
+                    data:
+                      - id: b51f0d0a-b790-11ed-afa1-0242ac120002
+                        name: name
+                        product_conditions:
+                          - id_equal: id_equal1
+                            description_like: description_like1
+                            price_min: 5
+                            price_max: 10
+                          - id_equal: id_equal2
+                            description_like: description_like2
+                            price_min: 30
+                            price_max: 15
+                      - id: b51f0d0a-b790-11ed-afa1-0242ac120002
+                        name: name
+                        product_conditions:
+                          - id_equal: id_equal1
+                            description_like: description_like1
+                            price_min: 5
+                            price_max: 10
+                          - id_equal: id_equal2
+                            description_like: description_like2
+                            price_min: 30
+                            price_max: 15
+        "204":
+          description: Workspace not found
+        "404":
+          description: No product found
+        "500":
+          description: Internal server error

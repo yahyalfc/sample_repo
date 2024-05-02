@@ -1,0 +1,10 @@
+.checked {
+  color: #efdf00;
+  font-size: 40px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+.fa-star {
+  text-align: center !important;
+}

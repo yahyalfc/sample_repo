@@ -1,0 +1,9 @@
+.okayButton {
+  background-color: #1c8fec;
+}
+.cancelButton:hover {
+  background-color: #f76767 !important;
+}
+.cancelButton {
+  background-color: #fa013b !important;
+}

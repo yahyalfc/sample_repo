@@ -1,0 +1,139 @@
+{
+    "data_link_id": "",
+    "property_id": "",
+    "property_name": "",
+    "property_description": "",
+    "property_type": "",
+    "integration_type": "",
+    "property_image_url": "",
+    "guide_book_url": "",
+    "wifi_details": {
+        "wifi_name": "",
+        "wifi_password": "",
+        "note": ""
+    },
+    "reservation": {
+        "checkin": {
+            "checkin_time_start": {
+                "hour": "",
+                "minutes": "",
+                "am_pm": ""
+            },
+            "checkin_time_end": {
+                "hour": "",
+                "minutes": "",
+                "am_pm": ""
+            },
+            "is_checkin_window": false,
+            "checkin_instructions": "",
+            "self_checkin": {
+                "availibility": false,
+                "note": ""
+            },
+            "early_checkin": {
+                "option": "",
+                "note": ""
+            },
+            "checkin_options": []
+        },
+        "checkout": {
+            "checkout_time_start": {
+                "hour": "",
+                "minutes": "",
+                "am_pm": ""
+            },
+            "checkout_time_end": {
+                "hour": "",
+                "minutes": "",
+                "am_pm": ""
+            },
+            "is_checkout_window": false,
+            "checkout_instructions": "",
+            "self_checkout": {
+                "availibility": false,
+                "note": ""
+            }
+        }
+    },
+    "location": {
+        "lat": "",
+        "lng": "",
+        "country": "",
+        "city": "",
+        "complete_address": "",
+        "postal_code": "",
+        "time_zone": ""
+    },
+    "accomodation": {
+        "number_of_rooms": 0,
+        "number_of_beds": 0,
+        "number_of_bathrooms": 0,
+        "number_of_kitchens": 0,
+        "rooms": "",
+        "guest_capacity": {
+            "max_guests": 0,
+            "childern": 0,
+            "infants": 0,
+            "adults": 0
+        }
+    },
+    "financials": {
+        "cleaning_fee": 0,
+        "pet_fee": 0,
+        "extra_person_fee": 0,
+        "refundable_damage_deposit": 0,
+        "currency": ""
+    },
+    "faqs": [],
+    "amenities": [],
+    "guest_policies": {
+        "smoking_policy": {
+            "value": "",
+            "note": ""
+        },
+        "pets_policy":  {
+            "value": "",
+            "note": ""
+        },
+        "security_policy": "",
+        "parties_events_policy": "",
+        "internet_usage_policy": "",
+        "cancellation_policy": "",
+        "property_policy": ""
+    },
+    "terms": {
+        "min_nights": 0,
+        "max_nights": 0
+    },
+    "contacts": {
+        "personal_contact": {
+            "name": "",
+            "contact_number": "",
+            "email": ""
+        },
+        "emergency_contacts": {
+            "police_helpline": "",
+            "firebrigade_helpline": ""
+        }
+    },
+    "transportation": {
+        "options": [],
+        "note": ""
+    },
+    "recommendations": [],
+    "accessibility": {
+        "options": [],
+        "note": ""
+    },
+    "parking": {
+        "parking_type": "",
+        "parking_reservation": "",
+        "parking_is_private": false,
+        "parking_cost": "",
+        "accessibility_parking": false,
+        "parking_image_url": "",
+        "total_spots": 0,
+        "additional_details": ""
+    },
+    "unit_types": []
+}

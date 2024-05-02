@@ -1,0 +1,111 @@
+.my-loader:empty {
+  margin: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border: 5px solid #f3f3f3;
+  border-top: 5px solid #42a5f5;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  animation: spin 1s linear infinite;
+}
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+.main {
+  display: grid;
+  place-items: center;
+  /* justify-content: center; */
+  background-color: whitesmoke;
+  height: 100vh;
+  /* position: relative; */
+}
+.svg {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  /* height: 100vh; */
+}
+.card {
+  display: grid;
+  place-items: center;
+  border-radius: 15px;
+  /* margin-top: 10%; */
+  padding: 15px 50px;
+  /* position: absolute; */
+  /* top: 50%; */
+  /* transform: translateY(80%); */
+}
+
+#right-wheel,
+#left-wheel,
+#center-wheel {
+  animation: wheel 0.2s linear infinite;
+  transform-origin: center;
+  transform-box: fill-box;
+}
+
+#Body {
+  animation: truckBody 0.2s ease-in-out infinite alternate;
+  /* transform-origin: bottom; */
+}
+
+#smoke {
+  animation: smokee 1s ease infinite alternate;
+  /* transform-origin: right; */
+  /* transform-box: fill-box; */
+}
+#outer1,
+#outer2,
+#outer3,
+#outer4 {
+  animation: outersmokee 1s ease-out infinite alternate;
+}
+
+@keyframes outersmokee {
+  from {
+    transform: rotateY(0deg);
+  }
+  to {
+    transform: rotateY(40deg);
+  }
+}
+
+@keyframes smokee {
+  from {
+    transform: rotateY(0deg);
+  }
+  to {
+    transform: rotateY(30deg);
+  }
+}
+@keyframes truckBody {
+  from {
+    transform: rotateX(0deg);
+  }
+  to {
+    transform: rotateX(20deg);
+  }
+}
+
+@keyframes wheel {
+  from {
+    transform: rotateZ(0deg);
+  }
+  to {
+    transform: rotateZ(360deg);
+  }
+}

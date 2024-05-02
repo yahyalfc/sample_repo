@@ -1,0 +1,36 @@
+{
+    "property_id": "uid",
+    "property_name": "name",
+    "property_type": "propertyType",
+    "property_description": {"extractDescription": ["fetchedDescription", "extraNotes", "ownerNotes"]},
+    "integration_type": "integration_type",   
+    "property_image_url": "pictureLink",
+    "guide_book_url": "guideBookUrl",
+    "wifi_details.wifi_name": "wifiNetwork",
+    "wifi_details.wifi_password": "wifiPassword",
+
+    "location.lat": "address.latitude",
+    "location.lng": "address.longitude",
+    "location.country": "address.countryCode",
+    "location.complete_address": "address.address",
+    "location.postal_code": "address.zipcode",
+    "location": {"extractCity": ["address"]},
+   
+    "accomodation.number_of_rooms": "bedrooms",
+    "accomodation.number_of_beds": "beds",
+    "accomodation.guest_capacity.max_guests": "availability.maxGuests",
+    "accomodation": {"extractBathroomsAndRooms": ["bathrooms", "fetchedRooms"]},
+
+    "reservation": {"extractCheckinCheckoutTimes": ["availability"]},
+
+    "financials.currency": "pricing.currency",
+    "financials.cleaning_fee": "pricing.cleaningFee",
+    "financials.extra_person_fee": "pricing.extraGuestFee",
+    "financials.refundable_damage_deposit": "pricing.securityDeposit",
+
+    "amenities": {"extractAmenities": ["fetchedAmmenties"]},
+
+    "guest_policies": {"extractPolicies": ["cancellationPolicy", "fetchedPropertyRules"]},
+    "terms.min_nights": "availability.minimumStay",
+    "terms.max_nights": "availability.maximumStay"
+}

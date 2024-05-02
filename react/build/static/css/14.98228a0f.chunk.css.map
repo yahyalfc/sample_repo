@@ -1,0 +1,1 @@
+{"version":3,"sources":["webpack://src/components/SwalStyle/SwalStyle.css"],"names":[],"mappings":"AAAA,YACE,wBACF,CACA,oBACE,kCACF,CACA,cACE,kCACF","file":"14.98228a0f.chunk.css","sourcesContent":[".okayButton {\n  background-color: #1c8fec;\n}\n.cancelButton:hover {\n  background-color: #f76767 !important;\n}\n.cancelButton {\n  background-color: #fa013b !important;\n}\n"]}

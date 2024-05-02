@@ -1,0 +1,7 @@
+.MuiDataGrid-colCellRight {
+  border: none !important;
+  scrollbar-width: thin !important;
+}
+.MuiTablePagination-actions {
+  background-color: "green";
+}

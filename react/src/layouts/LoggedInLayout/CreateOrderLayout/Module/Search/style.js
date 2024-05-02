@@ -1,0 +1,63 @@
+export default {
+  imagecontainer: {
+    backgroundColor: "yellow",
+    width: "100%",
+    display: "block",
+  },
+  margin5: { marginBottom: 5 },
+  textsitelocation: {
+    marginBottom: 0,
+    padding: 2,
+    color: "#42a5f5",
+    fontSize: 14,
+    fontWeight: "600",
+  },
+  cardGrid: {
+    paddingTop: 1,
+    paddingBottom: 1,
+    height: "auto",
+    borderRadius: 5,
+    boxShadow: " 0 0 17px -5px #9E9E9E",
+  },
+  mainContainer: { paddingLeft: 20 },
+  icon: { fontSize: 25, cursor: "pointer", color: "#42a5f5" },
+  box: {
+    paddingLeft: 10,
+    paddingRight: 10,
+    borderWidth: 1,
+    borderStyle: "solid",
+    borderBottomColor: "#9f9f9f",
+    borderTopColor: "transparent",
+    borderLeftColor: "transparent",
+    borderRightColor: "transparent",
+  },
+  lastbox: {
+    paddingLeft: 10,
+    paddingRight: 10,
+
+  },
+  placementBox: { paddingLeft: 10, margin: 0 },
+  divadress: {
+    borderWidth: 1,
+    borderStyle: "solid",
+    borderBottomColor: "#9f9f9f",
+    borderTopColor: "transparent",
+    borderLeftColor: "transparent",
+    borderRightColor: "transparent",
+  },
+  textadress: {
+    padding: 2,
+    color: "#9f9f9f",
+    fontSize: 14,
+    marginBottom: 15,
+  },
+  categoryCard: {
+    boxShadow: "0 0 17px -5px #9e9e9e",
+    width: "100%",
+    borderRadius: "8px",
+    paddingLeft: "10px",
+    paddingRight: "10px",
+    paddingTop: "10px",
+    paddingBottom: "10px",
+  },
+};

@@ -1,0 +1,348 @@
+openapi: 3.0.0
+info:
+  title: Channel UTM API
+  description: Manage sources
+  version: 1.0.0
+servers:
+  - url: https://connect.weberlo.net
+x-amazon-apigateway-request-validators:
+  all:
+    validateRequestBody: true
+    validateRequestParameters: true
+  params-only:
+    validateRequestBody: false
+    validateRequestParameters: true
+components:
+  schemas:
+    UtmCondition:
+      type: object
+      properties:
+        utm_source:
+          type: [string, 'null']
+        utm_medium:
+          type: [string, 'null']
+        utm_campaign:
+          type: [string, 'null']
+        utm_content:
+          type: [string, 'null']
+    ChannelUtm:
+      type: object
+      properties:
+        id:
+          type: string
+          pattern: "^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89abAB][0-9a-f]{3}-[0-9a-f]{12}$"
+          example: "123e4567-e89b-12d3-a456-426655440000"
+        workspace_id:
+          type: string
+          pattern: "^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89abAB][0-9a-f]{3}-[0-9a-f]{12}$"
+          example: "123e4567-e89b-12d3-a456-426655440000"
+        name:
+          type: string
+          example: MyChannel
+        icon:
+          type: string
+          example: https://example.com/myicon.png
+        __typename:
+          type: string
+          example: SimpleChannel
+        conditions:
+          type: array
+          items:
+            $ref: "#/components/schemas/UtmCondition"
+        created_at:
+          type: string
+          example: "2023-03-29T00:00:00.000Z"
+        updated_at:
+          type: string
+          example: "2023-03-29T00:00:00.000Z"
+  securitySchemes:
+    customAuthorizer:
+      type: apiKey
+      name: Authorization
+      in: header
+      x-amazon-apigateway-authtype: Custom authorizer
+      x-amazon-apigateway-authorizer:
+        type: request
+        identitySource: method.request.header.Authorization
+        authorizerUri: arn:${AWS::Partition}:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/arn:${AWS::Partition}:lambda:${AWS::Region}:${AWS::AccountId}:function:service-auth-auth/invocations
+        authorizerResultTtlInSeconds: 0
+paths:
+  /channel-utm:
+    parameters:
+      - in: query
+        name: workspace_id
+        description: Workspace ID required
+        required: true
+        schema:
+          type: string
+          pattern: '^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89abAB][0-9a-f]{3}-[0-9a-f]{12}$'
+          example: '123e4567-e89b-12d3-a456-426655440000'
+    options:
+      x-internal: true
+      summary: CORS support
+      description: |
+        Enable CORS by returning correct headers
+      tags:
+      - CORS
+      responses:
+        200:
+          description: Default response for CORS method
+          headers:
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+            Access-Control-Allow-Methods:
+              schema:
+                type: string
+            Access-Control-Allow-Headers:
+              schema:
+                type: string
+          content: {}
+      x-amazon-apigateway-integration:
+        type: mock
+        requestTemplates:
+          application/json: |
+            {
+              "statusCode" : 200
+            }
+        responses:
+          default:
+            statusCode: "200"
+            responseParameters:
+              method.response.header.Access-Control-Allow-Headers: '''Set-Cookie,Cookie,Session-ID,Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token,Access-Control-Allow-Headers,Access-Control-Allow-Credentials,Access-Control-Allow-Origin,Access-Control-Max-Age,Access-Control-Expose-Headers'''
+              method.response.header.Access-Control-Allow-Methods: '''*'''
+              method.response.header.Access-Control-Allow-Origin: '''*'''
+            responseTemplates:
+              application/json: |
+                {}
+    post:
+      tags:
+        - UTM Channel
+      summary: Add a utm channel
+      security: [{ customAuthorizer: [] }]
+      x-amazon-apigateway-request-validator: all
+      x-amazon-apigateway-integration:
+        uri: arn:${AWS::Partition}:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/arn:${AWS::Partition}:lambda:${AWS::Region}:${AWS::AccountId}:function:service-channel-utm-add/invocations
+        passthroughBehavior: 'when_no_match'
+        httpMethod: 'POST'
+        contentHandling: "CONVERT_TO_TEXT"
+        type: "aws_proxy"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  example: "John doe"
+                icon:
+                  type: string
+                  example: "left-message"
+                conditions:
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/UtmCondition' 
+              required:
+                - name
+                - icon
+                - conditions 
+            examples:
+              application/json:
+                value:
+                  name: John doe
+                  icon: left-message
+                  conditions:
+                    - utm_source: utm_source
+                      utm_medium: utm_medium    
+                      utm_campaign: utm_campaign
+                      utm_content: utm_content   
+      responses:
+        "200":
+          description: Successfully added a product
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ChannelUtm"
+              examples:
+                application/json:
+                  value:
+                    data:
+                        id: 0db57de4-3ca3-45bd-af38-f6cf63d3404d
+                        workspace_id: bc54b16a-b11a-431c-a742-0cce9bc618ea
+                        name: Name 1
+                        icon: Icon 1
+                        conditions:
+                          - utm_source: utm_source1
+                            utm_medium: utm_medium1
+                            utm_campaign: utm_campaign1
+                            utm_content: utm_content1
+                          - utm_source: utm_source2
+                            utm_medium: utm_medium2
+                            utm_campaign: utm_campaign2
+                            utm_content: utm_content2
+        "500":
+          description: Internal server error
+  /channel-utm/{id}:
+    parameters:
+      - in: path
+        name: id
+        description: The id of channel-utm to get or update
+        required: true
+        schema:
+          type: string
+          pattern: '^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89abAB][0-9a-f]{3}-[0-9a-f]{12}$'
+          example: '123e4567-e89b-12d3-a456-426655440000'
+      - in: query
+        name: workspace_id
+        description: Workspace ID is required in every request
+        required: true
+        schema:
+          type: string
+          pattern: '^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89abAB][0-9a-f]{3}-[0-9a-f]{12}$'
+          example: '123e4567-e89b-12d3-a456-426655440000'
+    options:
+      x-internal: true
+      summary: CORS support
+      description: |
+        Enable CORS by returning correct headers
+      tags:
+      - CORS
+      responses:
+        200:
+          description: Default response for CORS method
+          headers:
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+            Access-Control-Allow-Methods:
+              schema:
+                type: string
+            Access-Control-Allow-Headers:
+              schema:
+                type: string
+          content: {}
+      x-amazon-apigateway-integration:
+        type: mock
+        requestTemplates:
+          application/json: |
+            {
+              "statusCode" : 200
+            }
+        responses:
+          default:
+            statusCode: "200"
+            responseParameters:
+              method.response.header.Access-Control-Allow-Headers: '''Set-Cookie,Cookie,Session-ID,Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token,Access-Control-Allow-Headers,Access-Control-Allow-Credentials,Access-Control-Allow-Origin,Access-Control-Max-Age,Access-Control-Expose-Headers'''
+              method.response.header.Access-Control-Allow-Methods: '''*'''
+              method.response.header.Access-Control-Allow-Origin: '''*'''
+            responseTemplates:
+              application/json: |
+                {}
+    get:
+      tags:
+        - UTM Channel
+      summary: Get a utm channel 
+      security: [{ customAuthorizer: [] }]
+      x-amazon-apigateway-request-validator: params-only
+      x-amazon-apigateway-integration:
+        uri: arn:${AWS::Partition}:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/arn:${AWS::Partition}:lambda:${AWS::Region}:${AWS::AccountId}:function:service-channel-utm-get/invocations
+        passthroughBehavior: "when_no_match"
+        httpMethod: 'POST'
+        contentHandling: "CONVERT_TO_TEXT"
+        type: "aws_proxy"
+      responses:
+        "200":
+          description: Successfully retrieved utm channel
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ChannelUtm"
+              examples:
+                application/json:
+                  value:
+                    data:
+                        id: 0db57de4-3ca3-45bd-af38-f6cf63d3404d
+                        workspace_id: bc54b16a-b11a-431c-a742-0cce9bc618ea
+                        name: Name 1
+                        icon: Icon 1
+                        conditions:
+                          - utm_source: utm_source
+                            utm_medium: utm_medium    
+                            utm_campaign: utm_campaign
+                            utm_content: utm_content
+                          - utm_source: utm_source
+                            utm_medium: utm_medium    
+                            utm_campaign: utm_campaign
+                            utm_content: utm_content
+        "404":
+          description: Utm channel not found
+        "500":
+          description: Internal server error
+    patch:
+      tags:
+        - UTM Channel
+      summary: Update a utm channel 
+      security: [{ customAuthorizer: [] }]
+      x-amazon-apigateway-request-validator: all
+      x-amazon-apigateway-integration:
+        uri: arn:${AWS::Partition}:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/arn:${AWS::Partition}:lambda:${AWS::Region}:${AWS::AccountId}:function:service-channel-utm-update/invocations
+        passthroughBehavior: "when_no_match"
+        httpMethod: 'POST'
+        contentHandling: "CONVERT_TO_TEXT"
+        type: "aws_proxy"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  required: false
+                icon:
+                  type: string
+                  required: false
+                conditions:
+                  type: array
+                  required: false
+                  items:
+                    $ref: "#/components/schemas/UtmCondition"
+            examples:
+              application/json:
+                value:
+                  name: John doe
+                  icon: left-message
+                  conditions:
+                    - utm_source: utm_source
+                      utm_medium: utm_medium    
+                      utm_campaign: utm_campaign
+                      utm_content: utm_content        
+      responses:
+        "200":
+          description: Successfully updated channel-utm
+        "404":
+          description: Utm channel not found
+        "500":
+          description: Internal server error
+    delete:
+      summary: Deletes a channel
+      tags:
+        - UTM Channel
+      security: [{ customAuthorizer: [] }]
+      x-amazon-apigateway-request-validator: params-only
+      x-amazon-apigateway-integration:
+        uri: arn:${AWS::Partition}:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/arn:${AWS::Partition}:lambda:${AWS::Region}:${AWS::AccountId}:function:service-channel-utm-delete/invocations
+        passthroughBehavior: "when_no_match"
+        httpMethod: 'POST'
+        contentHandling: "CONVERT_TO_TEXT"
+        type: "aws_proxy"
+      responses:
+        "200":
+          description: Successfully deleted channel
+        "404":
+          description: Channel not found
+        "500":
+          description: Internal server error        

@@ -1,0 +1,51 @@
+export default {
+  divAlign: { display: "flex", paddingTop: 15, justifyContent: "flex-end" },
+
+  Link: {
+    // float: "left",
+    float: "right",
+    borderStyle: "solid",
+    borderColor: "transparent",
+    backgroundColor: "#42a5f5",
+    borderRadius: 4,
+    alignSelf: "center",
+  },
+  pConfirm: {
+    cursor: "pointer",
+    margin: 0,
+    color: "white",
+    paddingRight: 8,
+    paddingLeft: 8,
+    paddingTop: 5,
+    paddingBottom: 5,
+  },
+  m10: {
+    marginLeft: 10,
+  },
+  pView: {
+    margin: 0,
+    color: "white",
+    paddingRight: 8,
+    paddingLeft: 8,
+    paddingTop: 5,
+    paddingBottom: 5,
+  },
+  DeleteIcon: {
+    fill: "red",
+    fontSize: 34,
+    borderRadius: 5,
+    // marginTop: "-2",
+  },
+  modalHeader: { backgroundColor: "#42a5f5", color: "white" },
+  button: {
+    textDecoration: "underline",
+    // backgroundColor: "#42a5f5",
+    // border: "solid",
+    // borderColor: "#42a5f5",
+    // marginTop: 10,
+    // width: "20%",
+    color: "#42a5f5",
+    textTransform: "capitalize",
+    marginRight: 5,
+  },
+};
