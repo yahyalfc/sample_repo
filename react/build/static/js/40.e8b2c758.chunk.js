@@ -1,2 +1,0 @@
-(this.webpackJsonpklinker=this.webpackJsonpklinker||[]).push([[40],{799:function(e,i,s){"use strict";s.r(i),i.default=s.p+"static/media/gravel.0010ecfc.png"}}]);
-//# sourceMappingURL=40.e8b2c758.chunk.js.map

@@ -1,2 +1,0 @@
-(this.webpackJsonpklinker=this.webpackJsonpklinker||[]).push([[46],{802:function(e,i,t){"use strict";t.r(i),i.default=t.p+"static/media/timber.bfef31e8.jpg"}}]);
-//# sourceMappingURL=46.4e6fd817.chunk.js.map

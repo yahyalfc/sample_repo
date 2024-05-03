@@ -114,7 +114,6 @@ const EnterLocation = (props) => {
         <h5 style={{ color: "gray", fontSize: 18 }}>Please Select Location</h5>
         <Box width="100%" ml={2.5}>
           <GooglePlacesAutocomplete
-            apiKey="AIzaSyBt9I6muDiyEAJ9FhjaZBi6KTYdEU9wGVQ"
             selectProps={{
               placeholder: "Start typing to search..",
               value,

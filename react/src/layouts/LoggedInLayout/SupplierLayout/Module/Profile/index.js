@@ -268,8 +268,8 @@ function SupplierProfile() {
                   <div style={{ width: '80%' }}>
                     <label style={{ fontSize: 12, display: 'flex', justifyContent: 'left', color: 'rgb(170, 170, 170)', marginBottom: -5, paddingLeft: 15, backgroundColor: 'white', paddingBottom: 5 }} >Address*</label>
                     <GooglePlacesAutocomplete
-                      apiKey="AIzaSyBt9I6muDiyEAJ9FhjaZBi6KTYdEU9wGVQ"
-                      selectProps={{
+          apiKey={process.env.GooglePlacesAutocompleteAPI}
+          selectProps={{
                         placeholder: `${googleaddress}`,
                         addressvalue,
                         onChange: setaddressvalue,

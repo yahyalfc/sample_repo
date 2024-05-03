@@ -1,2 +1,0 @@
-(this.webpackJsonpklinker=this.webpackJsonpklinker||[]).push([[36],{797:function(e,t,i){"use strict";i.r(t),t.default=i.p+"static/media/concrete.e768014b.png"}}]);
-//# sourceMappingURL=36.fe36a1a5.chunk.js.map

@@ -67,7 +67,6 @@ const MapContainer = (props) => {
         <MyMapComponent
           isMarkerShown
           style={props.style}
-          googleMapURL="https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places&key=AIzaSyBt9I6muDiyEAJ9FhjaZBi6KTYdEU9wGVQ"
           loadingElement={<div style={{ height: `100%` }} />}
           containerElement={<div style={{ height: `100%` }} />}
           mapElement={<div style={{ height: `100%` }} />}

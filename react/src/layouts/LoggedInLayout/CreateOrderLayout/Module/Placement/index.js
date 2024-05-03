@@ -285,7 +285,6 @@ function OrderPlacement(props) {
 
               <Grid item xs={12} md={12}>
                 <GooglePlacesAutocomplete
-                  apiKey="AIzaSyBt9I6muDiyEAJ9FhjaZBi6KTYdEU9wGVQ"
                   selectProps={{
                     styles: {
                       input: (provided) => ({

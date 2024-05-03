@@ -103,7 +103,7 @@ function AddNewSupplierLocation({ locationsArray, setLocationsArray, handleModal
           }}
         />
         <GooglePlacesAutocomplete
-          apiKey="AIzaSyBt9I6muDiyEAJ9FhjaZBi6KTYdEU9wGVQ"
+          apiKey={process.env.GooglePlacesAutocompleteAPI}
           selectProps={{
             placeholder: `${customerLocationName}`,
             value,
